@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .edit-btn {
+            background-color: #f39c12;
+            color: white;
+        }
+        .show-id-btn {
+            background-color: #3498db;
+            color: white;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form input {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .form-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function toggleIdVisibility(stackId) {
+            var idElement = document.getElementById('stack-id-' + stackId);
+            if (idElement.style.display === 'none') {
+                idElement.style.display = 'inline';
+            } else {
+                idElement.style.display = 'none';
+            }
+        }
+
+        function toggleEditForm(stackId) {
+            var editForm = document.getElementById('edit-form-' + stackId);
+            if (editForm.style.display === 'none') {
+                editForm.style.display = 'block';
+            } else {
+                editForm.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Stack List</h1>
+    {% if stacks %}
+        <ul>
+            {% for stack in stacks %}
+                <li>
+                    {{ stack.stackValue }}
+                    <div>
+                        <button class="show-id-btn" onclick="toggleIdVisibility({{ stack.id }})">Show ID</button>
+                        <span id="stack-id-{{ stack.id }}" style="display:none;"> - ID: {{ stack.id }}</span>
+                        <form action="{{ url_for('delete_stack', stack_id=stack.id) }}" method="post" style="display:inline;">
+                            <button class="delete-btn" type="submit">Delete</button>
+                        </form>
+                        <button class="edit-btn" onclick="toggleEditForm({{ stack.id }})">Edit</button>
+                    </div>
+                    <form id="edit-form-{{ stack.id }}" action="{{ url_for('update_stack', stack_id=stack.id) }}" method="post" style="display:none; margin-top: 10px;">
+                        <input type="text" name="stackValue" placeholder="New Value" required>
+                        <button type="submit">Update</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No stacks available.</p>
+    {% endif %}
+
+    <div class="form-container">
+        <h2>Create Stack</h2>
+        <form action="{{ url_for('create_stack') }}" method="post">
+            <input type="text" name="stackValue" placeholder="Stack Value" required>
+            <button type="submit">Create</button>
+        </form>
+    </div>
+</body>
+</html>
