@@ -33,7 +33,3 @@ Questo progetto comprende una serie di applicazioni e configurazioni per gestire
    - Eseguire il server del database.
    - Avviare il server back-end (indicazioni nella directory principale `stack-app`).
    - Avviare il front-end (indicazioni nella directory `stack-app-front-end`).
-
-## Licenza
-
-Questo progetto è rilasciato sotto la licenza MIT. Per maggiori dettagli, fare riferimento al file LICENSE nel repository.
