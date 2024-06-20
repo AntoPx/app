@@ -34,10 +34,6 @@ Questo progetto comprende una serie di applicazioni e configurazioni per gestire
    - Avviare il server back-end (indicazioni nella directory principale `stack-app`).
    - Avviare il front-end (indicazioni nella directory `stack-app-front-end`).
 
-## Contributi
-
-I contributi sono benvenuti. Si prega di creare un fork del repository e di inviare una pull request con una descrizione dettagliata delle modifiche.
-
 ## Licenza
 
 Questo progetto è rilasciato sotto la licenza MIT. Per maggiori dettagli, fare riferimento al file LICENSE nel repository.
